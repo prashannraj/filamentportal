@@ -20,6 +20,7 @@ class CompanyAdvisorResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-s-user';
     protected static ?int $navigationSort = 3;
     protected static ?string $navigationGroup = 'Company info';
+    protected static ?string $navigationLabel = 'Company Advisor';
 
     public static function form(Form $form): Form
     {

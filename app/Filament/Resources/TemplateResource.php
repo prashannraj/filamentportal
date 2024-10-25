@@ -20,6 +20,7 @@ class TemplateResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-folder-plus';
     protected static ?int $navigationSort = 7;
     protected static ?string $navigationGroup = 'Company info';
+    protected static ?string $navigationLabel = 'Templates';
 
     public static function form(Form $form): Form
     {

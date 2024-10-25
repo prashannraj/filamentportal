@@ -20,6 +20,7 @@ class CompanyBanchResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-s-home';
     protected static ?int $navigationSort = 2;
     protected static ?string $navigationGroup = 'Company info';
+    protected static ?string $navigationLabel = 'Company Branch';
 
     public static function form(Form $form): Form
     {
