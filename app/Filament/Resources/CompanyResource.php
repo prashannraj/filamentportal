@@ -7,17 +7,25 @@ use App\Filament\Resources\CompanyResource\RelationManagers;
 use App\Models\Company;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor;
+use Filament\Forms\Components\MarkdownEditor;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Columns\ImageColumn;
 
 class CompanyResource extends Resource
 {
     protected static ?string $model = Company::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    public static function canCreate (): bool
+    {
+        return false;
+    }
 
     public static function form(Form $form): Form
     {
@@ -33,6 +41,7 @@ class CompanyResource extends Resource
                 ->required()
                 ->maxLength(255),
             Forms\Components\TextInput::make('website')
+                ->prefix('URL')
                 ->required()
                 ->maxLength(255),
             Forms\Components\FileUpload::make('logo') // Changed to FileUpload
@@ -64,8 +73,9 @@ class CompanyResource extends Resource
             Forms\Components\TextInput::make('vat')
                 ->required()
                 ->maxLength(255),
-            Forms\Components\Textarea::make('footnote') // Changed to TextArea
+            Forms\Components\MarkdownEditor::make('footnote') // Changed to TextArea
                 ->required()
+                ->fileAttachmentsDirectory('attachments')
                 ->maxLength(5000), // Adjusted max length if needed
         ]);
     }
@@ -82,10 +92,14 @@ class CompanyResource extends Resource
                 ->searchable(),
             Tables\Columns\TextColumn::make('website')
                 ->searchable(),
-            Tables\Columns\TextColumn::make('logo') // Display as text, adjust as needed
-                ->searchable(),
-            Tables\Columns\TextColumn::make('stamp') // Display as text, adjust as needed
-                ->searchable(),
+            Tables\Columns\ImageColumn::make('logo') // Display as text, adjust as needed
+            ->defaultImageUrl(url('/images/logo.png'))
+            ->searchable()
+                ->square(),
+            Tables\Columns\ImageColumn::make('stamp') // Display as text, adjust as needed
+            ->defaultImageUrl(url('/images/stamp.png'))
+            ->square()
+            ->searchable(),
             Tables\Columns\TextColumn::make('telephone')
                 ->searchable(),
             Tables\Columns\TextColumn::make('email')
@@ -94,11 +108,11 @@ class CompanyResource extends Resource
                 ->searchable(),
             Tables\Columns\TextColumn::make('regulated_by')
                 ->searchable(),
-            Tables\Columns\TextColumn::make('regulated_logo') // Display as text, adjust as needed
-                ->searchable(),
+            Tables\Columns\ImageColumn::make('regulated_logo') // Display as text, adjust as needed
+            ->defaultImageUrl(url('/images/regulated_logo.png'))
+            ->square()
+            ->searchable(),
             Tables\Columns\TextColumn::make('vat')
-                ->searchable(),
-            Tables\Columns\TextColumn::make('footnote')
                 ->searchable(),
             Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -126,7 +140,12 @@ class CompanyResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\CompanyBanchesRelationManager::class,
+            RelationManagers\CompanyAdvisorsRelationManager::class,
+            RelationManagers\CompanyDocumentsRelationManager::class,
+            RelationManagers\EmailSendersRelationManager::class,
+            RelationManagers\ServiceFeesRelationManager::class,
+            RelationManagers\TemplatesRelationManager::class
         ];
     }
 

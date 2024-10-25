@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ServiceFee extends Model
 {
@@ -15,5 +16,14 @@ class ServiceFee extends Model
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);
+    }
+    /**
+     * Get all of the catogary for the ServiceFee
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function catogary(): HasMany
+    {
+        return $this->hasMany(Catogary::class);
     }
 }
