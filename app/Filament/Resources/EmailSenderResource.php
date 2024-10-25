@@ -17,7 +17,9 @@ class EmailSenderResource extends Resource
 {
     protected static ?string $model = EmailSender::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-inbox-arrow-down';
+    protected static ?int $navigationSort = 5;
+    protected static ?string $navigationGroup = 'Company info';
 
     public static function form(Form $form): Form
     {

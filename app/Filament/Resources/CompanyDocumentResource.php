@@ -17,7 +17,9 @@ class CompanyDocumentResource extends Resource
 {
     protected static ?string $model = CompanyDocument::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-document';
+    protected static ?int $navigationSort = 4;
+    protected static ?string $navigationGroup = 'Company info';
 
     public static function form(Form $form): Form
     {

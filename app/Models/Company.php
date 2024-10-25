@@ -27,9 +27,10 @@ class Company extends Model
     ];
 
 
-    public function getLogoUrlAttribute(){
-		return $this->logo ? Storage::url($this->logo) : null;
-	}
+    public function getLogoUrlAttribute()
+{
+    return $this->logo ? Storage::url($this->logo) : null;
+}
 
 
 	public function getRegulationLogoUrlAttribute() // Correct method name

@@ -17,7 +17,9 @@ class CompanyAdvisorResource extends Resource
 {
     protected static ?string $model = CompanyAdvisor::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-user';
+    protected static ?int $navigationSort = 3;
+    protected static ?string $navigationGroup = 'Company info';
 
     public static function form(Form $form): Form
     {

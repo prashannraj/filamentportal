@@ -31,8 +31,8 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Blue,
             ])
-            ->brandLogo($company ? asset($company->logo) : asset('images/logo.svg')) // Dynamically set logo
-            ->favicon($company ? asset($company->regulated_logo) : asset('images/favicon.png')) // Dynamically set favicon
+            ->brandLogo(fn () => view('filament.admin.logo'))
+            ->favicon(fn () => view('filament.admin.favicon'))
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
