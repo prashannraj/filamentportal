@@ -22,6 +22,7 @@ class CompanyBanchResource extends Resource
     protected static ?string $navigationGroup = 'Company info';
     protected static ?string $navigationLabel = 'Company Branch';
 
+
     public static function form(Form $form): Form
     {
         return $form
